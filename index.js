@@ -6,7 +6,7 @@ const inquirer = require('inquirer');
 const path = require('path');
 const fs = require('fs');
 
-const outputDir = path.resolve(__dirname, 'outut');
+const outputDir = path.resolve(__dirname, 'output');
 const outputPath = path.join(outputDir, "team.html");
 
 const render =require('./src/page-template.js')
@@ -16,7 +16,7 @@ const idArray = [];
 
 function appMenu() {
     function createManager() {
-        console.log("Please input team members");
+        console.log("Please input team members:");
         inquirer.prompt([
             {
                 type: "input",
@@ -26,7 +26,7 @@ function appMenu() {
                         if (answer !== "") {
                             return true;
                         }
-                        return "Please enter a character.";
+                        return "Please enter a name.";
                     }
             },
             {
@@ -57,7 +57,7 @@ function appMenu() {
       {
         type: "list",
         name: "memberChoice",
-        message: "Which role does this member have?",
+        message: "Input Member Role:",
         choices: [
           "Engineer",
           "Intern",
@@ -88,7 +88,7 @@ function appMenu() {
           if (answer !== "") {
             return true;
           }
-          return "Please enter a character.";
+          return "Please enter a name.";
         }
       },
       {
@@ -101,19 +101,19 @@ function appMenu() {
           );
           if (pass) {
             if (idArray.includes(answer)) {
-              return "This ID is already taken. Please enter a different number.";
+              return "ID in use. Enter a new number.";
             } else {
               return true;
             }
 
           }
-          return "Please enter a positive number greater than zero.";
+          return "Please enter a number greater than zero.";
         }
       },
       {
         type: "input",
         name: "engineerEmail",
-        message: "What is your engineer's email?",
+        message: "Input Engineer Email:",
         validate: answer => {
           const pass = answer.match(
             /\S+@\S+\.\S+/ // Input must match this format string@string.string
@@ -121,7 +121,7 @@ function appMenu() {
           if (pass) {
             return true;
           }
-          return "Please enter a valid Email.";
+          return "Please enter an email.";
         }
       },
       {
@@ -132,7 +132,7 @@ function appMenu() {
           if (answer !== "") {
             return true;
           }
-          return "Please enter a character.";
+          return "Please enter a username.";
         }
       }
     ]).then(answers => {
@@ -153,7 +153,7 @@ function appMenu() {
           if (answer !== "") {
             return true;
           }
-          return "Please enter a character.";
+          return "Please enter a name.";
         }
       },
       {
@@ -186,7 +186,7 @@ function appMenu() {
           if (pass) {
             return true;
           }
-          return "Please enter a valid Email.";
+          return "Please enter an email.";
         }
       },
       {
@@ -210,8 +210,8 @@ function appMenu() {
 
   function buildTeam() {
     // Create the output directory if the output path doesn't exist
-    if (!fs.existsSync(OUTPUT_DIR)) {
-      fs.mkdirSync(OUTPUT_DIR)
+    if (!fs.existsSync(outputDir)) {
+      fs.mkdirSync(outputDir)
     }
     fs.writeFileSync(outputPath, render(teamMembers), "utf-8");
   }
