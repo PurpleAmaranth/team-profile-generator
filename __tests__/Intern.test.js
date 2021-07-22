@@ -11,7 +11,7 @@ test("Can input school correctly", () => {
 
 // Get Intern Role
 test("Confirm role is Intern", () => {
-    cosnt testInput = "Intern";
+    const testInput = "Intern";
     const e = new Intern("Anon", 1, "email@email.com", "CSM");
     expect(e.getRole()).toBe(testInput);
 });
