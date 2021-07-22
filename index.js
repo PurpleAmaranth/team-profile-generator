@@ -1,5 +1,10 @@
-const Team = require('./team');
-const { members } = require('./member');
+const Employee = require('./lib/Employee');
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern');
+const Manager = require('./lib/Manager');
+const inquirer = require('inquirer');
+const path = require('path');
+const
 
 const team = new Team("Software Engineering Team", members);
 
