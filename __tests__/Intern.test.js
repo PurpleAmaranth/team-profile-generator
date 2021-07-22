@@ -4,22 +4,22 @@ const Intern = require("../lib/intern");
 // Define test functions to test input:
 // Can Input School
 test("Can input school correctly", () => {
-    const testInput = "CSM";
-    const e = new Intern("Anon", 1, "email@email.com", testInput);
-    expect(e.school).toBe(testInput);
+    const school = "CSM";
+    const e = new Intern("Anon", 1, "email@email.com", school);
+    expect(e.school).toBe(school);
 });
 
 // Get Intern Role
 test("Confirm role is Intern", () => {
-    const testInput = "Intern";
+    const role = "Intern";
     const e = new Intern("Anon", 1, "email@email.com", "CSM");
-    expect(e.getRole()).toBe(testInput);
+    expect(e.getRole()).toBe(role);
 });
 
 // Get Intern School
 test("Can getSchool()", () => {
-    const testInput = "CSM";
-    cosnt e = new Intern("Anon", 1, "email@email.com", testInput);
-    expect(e.getSchool()).toBe(testInput);
+    const school = "CSM";
+    const e = new Intern("Anon", 1, "email@email.com", school);
+    expect(e.getSchool()).toBe(school);
 });
 
