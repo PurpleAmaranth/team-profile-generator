@@ -1,3 +1,4 @@
+// Define requirements and variables
 const Employee = require('./lib/Employee');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
@@ -5,17 +6,18 @@ const Manager = require('./lib/Manager');
 const inquirer = require('inquirer');
 const path = require('path');
 const fs = require('fs');
-
 const outputDir = path.resolve(__dirname, 'output');
 const outputPath = path.join(outputDir, "team.html");
-
 const render =require('./src/page-template.js')
-
 const teamMembers = [];
 const idArray = [];
 
-function appMenu() {
+// Create functions to get user input
+function teamInputMenu() {
+    // Main input menu
     function createManager() {
+        // Gets Manager input to create manager
+        
         console.log("Please input team members:");
         inquirer.prompt([
             {
@@ -23,11 +25,11 @@ function appMenu() {
                 name: "managerName",
                 message: "Input Team Manager Name:",
                 validate: answer => {
-                        if (answer !== "") {
-                            return true;
-                        }
-                        return "Please enter a name.";
+                    if (answer !== "") {
+                        return true;
                     }
+                    return "Please enter a name.";
+                }
             },
             {
                 type: "input",
@@ -41,42 +43,41 @@ function appMenu() {
                         return true;
                     }
                     return "Please enter a number greater than zero.";
+                }
+            }
+        ]).then(answers => {
+            const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber);
+            teamMembers.push(manager);
+            idArray.push(answers.managerId);
+            createTeam();
+        });
+    }
+
+    function createTeam() {
+        inquirer.prompt([
+            {
+                type: "list",
+                name: "memberChoice",
+                message: "Input Member Role:",
+                choices: [
+                "Engineer",
+                "Intern",
+                "Quit"
+                ]
+            }
+        ]).then(userChoice => {
+        switch (userChoice.memberChoice) {
+            case "Engineer":
+            addEngineer();
+            break;
+            case "Intern":
+            addIntern();
+            break;
+            default:
+            buildTeam();
         }
-      }
-    ]).then(answers => {
-      const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber);
-      teamMembers.push(manager);
-      idArray.push(answers.managerId);
-      createTeam();
-    });
-  }
-
-  function createTeam() {
-
-    inquirer.prompt([
-      {
-        type: "list",
-        name: "memberChoice",
-        message: "Input Member Role:",
-        choices: [
-          "Engineer",
-          "Intern",
-          "Quit"
-        ]
-      }
-    ]).then(userChoice => {
-      switch (userChoice.memberChoice) {
-        case "Engineer":
-          addEngineer();
-          break;
-        case "Intern":
-          addIntern();
-          break;
-        default:
-          buildTeam();
-      }
-    });
-  }
+        });
+    }
 
   function addEngineer() {
     inquirer.prompt([
@@ -220,19 +221,5 @@ function appMenu() {
 
 }
 
-appMenu();
+teamInputMenu();
 
-// //Existing team members:
-// team.welcome();
-// team.generateMemberCard('Geraldine');
-// team.generateMemberCard('Wylhelm');
-// team.generateMemberCard('Heather');
-// team.generateMemberCard('Cuzco');
-
-// //Should not be a member:
-// team.generateMemberCard('Anon')
-
-// //Should be added to the team:
-// team.addMember('Adriane', 'Boss');
-
-// team.printMembers(); //Should be 5
