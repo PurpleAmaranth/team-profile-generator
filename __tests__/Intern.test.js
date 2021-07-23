@@ -17,7 +17,7 @@ test("Confirm role is Intern", () => {
 });
 
 // Get Intern School
-test("Can getSchool()", () => {
+test("Can get School Name", () => {
     const school = "CSM";
     const e = new Intern("Anon", 1, "email@email.com", school);
     expect(e.getSchool()).toBe(school);
