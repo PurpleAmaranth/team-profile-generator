@@ -3,10 +3,10 @@ const Engineer = require("../lib/Engineer");
 
 // Define test functions to test input:
 // Can Input GitHub
-test("Can set GitHUb", () => {
+test("Can set GitHub", () => {
   const gitHub = "GitHubGuy";
   const e = new Engineer("Rob", 1, "email@email.com", gitHub);
-  expect(e.github).toBe(gitHub);
+  expect(e.gitHub).toBe(gitHub);
 });
 
 // Get Engineer Role
@@ -20,5 +20,5 @@ test("Role is Engineer", () => {
 test("Can get GitHub username", () => {
   const gitHub = "GitHubGuy";
   const e = new Engineer("Rob", 1, "email@email.com", gitHub);
-  expect(e.getGithub()).toBe(gitHub);
+  expect(e.getGitHub()).toBe(gitHub);
 });

@@ -13,13 +13,13 @@ test("Can input office number correctly", () => {
 // Get Manager Role
 test("Confirm role is Manager", () => {
     const role = "Manager";
-    const e = new Intern("Gandalf", 1, "email@email.com", 201);
+    const e = new Manager("Gandalf", 1, "email@email.com", 201);
     expect(e.getRole()).toBe(role);
 });
 
 // Get Manager Office Number
 test("Can getOfficeNumber()", () => {
     const officeNumber = 201;
-    const e = new Intern("Gandalf", 1, "email@email.com", officeNumber);
+    const e = new Manager("Gandalf", 1, "email@email.com", officeNumber);
     expect(e.getOfficeNumber()).toBe(officeNumber);
 });
