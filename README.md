@@ -11,7 +11,7 @@ In this project I build a Node.js command-line application that takes in informa
 
 ## Walkthrough Video
 
-![HTML webpage titled “My Team” features employee data boxes listing employee names, titles, and other key info.](./assets/images/team-profile-generator.png)
+![HTML webpage titled “My Team” features employee data boxes listing employee names, titles, and other key info.](./assets/videos/team-profile-generator.mp4)
 
 ## User Story
 
