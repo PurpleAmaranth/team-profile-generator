@@ -7,8 +7,8 @@ const inquirer = require('inquirer');
 const path = require('path');
 const fs = require('fs');
 const outputDir = path.resolve(__dirname, 'output');
-const outputPath = path.join(outputDir, "team.html");
-const render =require('./src/page-template.js')
+const outputPath = path.join(outputDir, "index.html");
+const render =require('./src/webpage.js')
 const teamMembers = [];
 const idArray = [];
 
@@ -18,7 +18,7 @@ function teamInputMenu() {
     function createManager() {
         // Gets Manager input to create manager
         
-        console.log("Please input team members:");
+        console.log("Please Input Team Members:");
         inquirer.prompt([
             {
                 type: "input",
@@ -36,21 +36,49 @@ function teamInputMenu() {
                 name: "managerId",
                 message: "Input Manager ID:",
                 validate: answer => {
-                    const pass = answer.match(
-                        /^1-9\d*$/ // Characters must be a decimal between 1 and 9.
+                    const valid = answer.match(
+                        /^[1-9]\d*$/ // Characters must be a decimal between 1 and 9.
                     );
-                    if (pass) {
+                    if (valid) {
                         return true;
                     }
                     return "Please enter a number greater than zero.";
                 }
+            },
+            {
+              type: "input",
+              name: "managerEmail",
+              message: "Input the Manager's email:",
+              validate: answer => {
+                const valid = answer.match(
+                  /\S+@\S+\.\S+/
+                );
+                if (valid) {
+                  return true;
+                }
+                return "Please enter a valid email address.";
+              }
+            },
+            {
+              type: "input",
+              name: "managerOfficeNumber",
+              message: "Input the Manager's Office Number:",
+              validate: answer => {
+                const valid = answer.match(
+                  /^[1-9]\d*$/
+                );
+                if (valid) {
+                  return true;
+                }
+                return "Please enter a positive number greater than zero.";
+              }
             }
-        ]).then(answers => {
+          ]).then(answers => {
             const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber);
             teamMembers.push(manager);
             idArray.push(answers.managerId);
             createTeam();
-        });
+          });
     }
 
     function createTeam() {
@@ -97,10 +125,10 @@ function teamInputMenu() {
         name: "engineerId",
         message: "Input Engineer ID:",
         validate: answer => {
-          const pass = answer.match(
+          const valid = answer.match(
             /^[1-9]\d*$/
           );
-          if (pass) {
+          if (valid) {
             if (idArray.includes(answer)) {
               return "ID in use. Enter a new number.";
             } else {
@@ -116,10 +144,10 @@ function teamInputMenu() {
         name: "engineerEmail",
         message: "Input Engineer Email:",
         validate: answer => {
-          const pass = answer.match(
+          const valid  = answer.match(
             /\S+@\S+\.\S+/ // Input must match this format string@string.string
           );
-          if (pass) {
+          if (valid) {
             return true;
           }
           return "Please enter an email.";
@@ -162,10 +190,10 @@ function teamInputMenu() {
         name: "internId",
         message: "Input Intern ID:",
         validate: answer => {
-          const pass = answer.match(
+          const valid = answer.match(
             /^[1-9]\d*$/
           );
-          if (pass) {
+          if (valid) {
             if (idArray.includes(answer)) {
               return "ID in use. Enter a new number.";
             } else {
@@ -181,10 +209,10 @@ function teamInputMenu() {
         name: "internEmail",
         message: "Input Intern Email:",
         validate: answer => {
-          const pass = answer.match(
+          const valid = answer.match(
             /\S+@\S+\.\S+/
           );
-          if (pass) {
+          if (valid) {
             return true;
           }
           return "Please enter an email.";
